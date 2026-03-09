@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Samad 4KTECK · Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-white: #FFFFFF;
+            --bg-light: #F8FAFC;
+            --text-dark: #0F172A;
+            --text-gray: #475569;
+            --teal: #0F766E;
+            --teal-dark: #115E59;
+            --teal-light: #14B8A6;
+            --gold: #B45309;
+            --gold-dark: #92400E;
+            --gold-light: #F59E0B;
+            --border: #E2E8F0;
+            --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(-45deg, #f1f5f9, #e6eef9, #f0f7ff, #e8f0fe);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .app {
+            max-width: 400px;
+            width: 100%;
+            height: 100vh;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 0px;
+            box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255,255,255,0.5);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+            padding: 16px 20px;
+            color: white;
+            box-shadow: 0 10px 20px -10px rgba(15,118,110,0.5);
+            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 2px;
+        }
+
+        .header p {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 16px;
+            scroll-behavior: smooth;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 22px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal), var(--gold));
+        }
+
+        .badge {
+            color: var(--teal);
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: inline-block;
+            background: rgba(15,118,110,0.08);
+            padding: 4px 12px;
+            border-radius: 30px;
+        }
+
+        .title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+
+        .sub {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin-bottom: 18px;
+        }
+
+        /* Download Button */
+        .download-container {
+            text-align: center;
+            margin: 15px 0 20px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #f97316, #c2410c);
+            color: white;
+            font-weight: 700;
+            padding: 14px 28px;
+            border-radius: 40px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 20px -8px #f97316, 0 4px 0 #9a3412;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .download-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 #9a3412;
+        }
+
+        .download-btn.disabled {
+            background: #94a3b8;
+            box-shadow: 0 4px 0 #64748b;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .download-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        /* Game Buttons */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 10px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+        }
+
+        .btn:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .btn-teal {
+            background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        }
+
+        /* YouTube Card */
+        .youtube-card {
+            background: white;
+            border-radius: 28px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .video-thumb {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(145deg, #cbd5e1, #e2e8f0);
+            border-radius: 20px;
+            margin: 16px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .video-thumb:hover {
+            transform: scale(1.02);
+        }
+
+        .play {
+            width: 50px;
+            height: 50px;
+            background: #dc2626;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(220,38,38,0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .play::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 16px solid white;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            margin-left: 4px;
+        }
+
+        .giveaway {
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .giveaway h4 {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .giveaway p {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+
+        /* BOTTOM BAR - PERFECT SIZES */
+        .bottom-bar {
+            background: white;
+            border-top: 2px solid var(--border);
+            padding: 20px 8px 25px 8px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 20;
+            flex-shrink: 0;
+            width: 100%;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.03);
+            min-height: 120px;
+            position: relative;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 0.65rem;
+            font-weight: 600;
+            width: 18%;
+            transition: all 0.2s;
+            padding: 0;
+            border-radius: 16px;
+            min-height: 100px;
+            gap: 6px;
+            position: relative;
+            top: -15px;
+        }
+
+        .nav-item:hover {
+            background: rgba(15,118,110,0.08);
+            color: var(--teal);
+        }
+
+        .icon {
+            width: 44px;
+            height: 44px;
+            background: var(--bg-light);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            margin-bottom: 2px;
+        }
+
+        .icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--teal);
+        }
+
+        .nav-item span {
+            display: block;
+            text-align: center;
+            width: 100%;
+            line-height: 1.2;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: inherit;
+            margin-top: 2px;
+        }
+
+        /* Prediction Button - Special - BADA RAHEGA */
+        .nav-item.prediction {
+            width: 22%;
+        }
+
+        .nav-item.prediction .icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border: 2px solid white;
+            box-shadow: 0 6px 15px rgba(180,83,9,0.4);
+            border-radius: 20px;
+        }
+
+        .nav-item.prediction .icon svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        .nav-item.prediction span {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.7rem;
+        }
+
+        /* FULLSCREEN GAME VIEW */
+        .game-view {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .game-view.show {
+            display: flex;
+        }
+
+        .game-header {
+            background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+            padding: 12px 16px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2001;
+            flex-shrink: 0;
+        }
+
+        .game-header .back-btn {
+            background: rgba(255,255,255,0.2);
+            border-radius: 30px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .game-header .back-btn:active {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .game-header .back-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        .game-header .game-title {
+            font-size: 1rem;
+            font-weight: 600;
+            flex: 1;
+            text-align: center;
+        }
+
+        .game-frame-container {
+            flex: 1;
+            width: 100%;
+            position: relative;
+            background: #000;
+        }
+
+        .game-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* FLOATING PREDICTION BUTTON IN GAME */
+        .game-prediction-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(180,83,9,0.5);
+            cursor: pointer;
+            z-index: 2002;
+            border: 3px solid white;
+            animation: float 2s infinite ease-in-out;
+        }
+
+        .game-prediction-btn svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        .game-prediction-btn span {
+            position: absolute;
+            top: -25px;
+            background: var(--gold);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 20px;
+            white-space: nowrap;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Prediction Panel */
+        .panel {
+            position: fixed;
+            bottom: 140px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            width: 90%;
+            max-width: 340px;
+            background: white;
+            border: 2px solid var(--teal);
+            border-radius: 32px;
+            padding: 20px;
+            box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255,255,255,0.5);
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        .panel.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) scale(1);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .panel-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--teal);
+        }
+
+        .close {
+            width: 32px;
+            height: 32px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid var(--border);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            background: var(--bg-light);
+            padding: 4px;
+            border-radius: 40px;
+            margin-bottom: 16px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 8px;
+            border-radius: 40px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            background: var(--teal);
+            color: white;
+            box-shadow: 0 4px 10px rgba(15,118,110,0.3);
+        }
+
+        .period {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--teal);
+            margin: 12px 0;
+        }
+
+        .timer {
+            font-size: 2.8rem;
+            font-weight: 800;
+            text-align: center;
+            background: var(--bg-light);
+            padding: 12px;
+            border-radius: 20px;
+            margin: 12px 0;
+            color: var(--text-dark);
+        }
+
+        .timer.warning {
+            color: #dc2626;
+            background: #fee2e2;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .prediction-area {
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 16px;
+            margin: 16px 0;
+            text-align: center;
+        }
+
+        .big-text {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--teal);
+        }
+
+        .number-grid {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .number-box {
+            width: 42px;
+            height: 42px;
+            background: white;
+            border: 2px solid var(--teal);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+        }
+
+        table {
+            width: 100%;
+            font-size: 0.7rem;
+            border-collapse: collapse;
+        }
+
+        th {
+            color: var(--teal);
+            border-bottom: 1px solid var(--border);
+            padding: 8px;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 6px;
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+
+        /* Modals */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 2500;
+            display: none;
+        }
+
+        .password-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 300px;
+            background: white;
+            border-radius: 32px;
+            padding: 24px;
+            border: 2px solid var(--teal);
+            box-shadow: var(--shadow-xl);
+            z-index: 2600;
+            display: none;
+        }
+
+        .password-modal input {
+            width: 100%;
+            padding: 14px;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            font-size: 1.3rem;
+            text-align: center;
+            letter-spacing: 4px;
+            margin: 20px 0;
+        }
+
+        .req-box {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 16px;
+            font-size: 0.75rem;
+            border: 1px dashed var(--teal);
+            direction: rtl;
+            line-height: 1.6;
+        }
+
+        .error-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 24px;
+            border-radius: 24px;
+            border: 2px solid #dc2626;
+            text-align: center;
+            z-index: 2700;
+            display: none;
+        }
+
+        /* Scrollbar */
+        .content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .content::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+        .content::-webkit-scrollbar-thumb {
+            background: var(--teal-light);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <div class="header">
+            <h1 id="mainTitle">Fantasy Hack</h1>
+            <p id="officialTag">Fantasy Official Hack</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content" id="scrollContainer">
+            <!-- Home Screen -->
+            <div id="homeScreen">
+                <!-- Game Card -->
+                <div class="card">
+                    <span class="badge" id="officialTag2">Fantasy Official Hack</span>
+                    <h2 class="title" id="gameTitle">92 Pak Hack</h2>
+                    <div class="sub" id="gameSub">Prediction System</div>
+
+                    <!-- DOWNLOAD BUTTON -->
+                    <div class="download-container">
+                        <a id="downloadBtn" href="#" class="download-btn disabled" target="_blank" onclick="trackDownload(event)">
+                            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                            Download App
+                        </a>
+                        <p id="downloadMessage" class="text-xs text-red-600 mt-1" style="display: none;">Link unavailable</p>
+                    </div>
+
+                    <!-- Game Buttons -->
+                    <button onclick="startGame('wingo')" class="btn btn-teal" id="wingoBtn">START WINGO</button>
+                    <button onclick="startGame('number')" class="btn btn-gold" id="numberBtn">START NUMBER</button>
+                    <p class="text-xs text-center text-gray-400 mt-3" id="footerText">Wingo v3.2 · Number v2.0</p>
+                </div>
+
+                <!-- YouTube + Giveaway -->
+                <div class="youtube-card">
+                    <div class="font-semibold text-teal-700 text-sm">📺 LATEST VIDEO</div>
+                    <div class="video-thumb" id="youtubeThumb" style="background-image: none;">
+                        <div class="play"></div>
+                    </div>
+                    <div class="giveaway">
+                        <h4 id="giveawayTitle">DAILY GIVEAWAY</h4>
+                        <p id="giveawayMsg">7E70 WINGO<br>2026 Ka New Hack</p>
+                        <div class="text-xs text-teal-600 mt-2" id="giveawayFooter">⏰ روزانہ رات 8 بجے</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM BAR - PERFECT SIZES -->
+        <div class="bottom-bar" id="socialBar">
+            <a href="#" class="nav-item" id="contactLink" target="_blank" onclick="handleClick(event)">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2z"/>
+                    </svg>
+                </div>
+                <span>Contact</span>
+            </a>
+            
+            <a href="#" class="nav-item" id="waLink" target="_blank" onclick="handleClick(event)">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12c0 2.14.72 4.1 1.93 5.68L2.5 21.5l3.82-1.43C7.9 20.78 9.86 21.5 12 21.5c5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+                    </svg>
+                </div>
+                <span>WA</span>
+            </a>
+
+            <!-- PREDICTION BUTTON - CENTER - BADA RAHEGA -->
+            <div class="nav-item prediction" onclick="togglePanel()">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                    </svg>
+                </div>
+                <span>PREDICT</span>
+            </div>
+
+            <a href="#" class="nav-item" id="ytLink" target="_blank" onclick="handleClick(event)">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </div>
+                <span>YT</span>
+            </a>
+            
+            <a href="#" class="nav-item" id="fbLink" target="_blank" onclick="handleClick(event)">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </div>
+                <span>FB</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- FULLSCREEN GAME VIEW -->
+    <div class="game-view" id="gameView">
+        <div class="game-header">
+            <div class="back-btn" onclick="backToHome()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                <span>Back</span>
+            </div>
+            <div class="game-title" id="gameViewTitle">WINGO GAME</div>
+        </div>
+        <div class="game-frame-container">
+            <iframe id="gameFrame" class="game-frame" src="https://www.example.com" allowfullscreen></iframe>
+            <!-- FLOATING PREDICTION BUTTON IN GAME -->
+            <div class="game-prediction-btn" onclick="togglePanel()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                </svg>
+                <span>PREDICT</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prediction Panel -->
+    <div class="panel" id="panel">
+        <div class="panel-header">
+            <h3 id="panelTitle">WINGO PREDICTION</h3>
+            <div class="close" onclick="hidePanel()">✕</div>
+        </div>
+
+        <div class="tabs">
+            <button onclick="switchGame('30S')" class="tab active" id="tab30">30S</button>
+            <button onclick="switchGame('1M')" class="tab" id="tab1M">1M</button>
+        </div>
+
+        <div class="period" id="period">--------</div>
+        <div class="timer" id="timer">⏱️ 30</div>
+
+        <div class="prediction-area" id="predArea">
+            <div id="wingoPred" style="display: none;">
+                <div class="big-text" id="wingoText">BIG</div>
+            </div>
+            <div id="numberPred" style="display: none;">
+                <div class="number-grid" id="numberGrid"></div>
+                <div class="text-xs text-amber-600 mt-2">ان میں سے کوئی ایک نمبر</div>
+            </div>
+        </div>
+
+        <table>
+            <thead id="tableHead"></thead>
+            <tbody id="history"></tbody>
+        </table>
+    </div>
+
+    <!-- Modals -->
+    <div class="overlay" id="overlay" onclick="closeModal()"></div>
+
+    <div class="password-modal" id="passwordModal">
+        <h3 class="text-center text-teal-700 font-bold">🔐 ENTER PASSWORD</h3>
+        <input type="password" id="passInput" maxlength="4">
+        <button onclick="checkPass()" class="btn btn-teal">UNLOCK</button>
+        <div class="req-box" id="reqText"></div>
+        <div class="text-center text-xs text-gray-400 mt-3 cursor-pointer" onclick="closeModal()">Close</div>
+    </div>
+
+    <div class="error-modal" id="errorModal">
+        <h3 style="color:#dc2626; font-weight:800; margin-bottom:15px;">WRONG PASSWORD</h3>
+        <button onclick="document.getElementById('errorModal').style.display='none'" class="btn" style="background:#dc2626;">OK</button>
+    </div>
+
+    <!-- Audio -->
+    <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+    <audio id="tick" loop style="display: none;">
+        <source src="data:audio/wav;base64,UklGRlwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVQAAACAgICAf39/f39/f3+AgICAf39/f39/f3+AgICAf39/f39/f3+AgICAf39/f39/f3+AgICAf39/f39/f3+AgICAf39/f39/f3+AgICAf38=" type="audio/wav">
+    </audio>
+
+    <script>
+        const DB_URL = "https://fantasy-c8b2c-default-rtdb.firebaseio.com";
+
+        // Visitor tracking
+        const VISITOR_KEY = 'samad_visitor_id';
+        let visitorId = localStorage.getItem(VISITOR_KEY);
+        const isNew = !visitorId;
+        
+        if (isNew) {
+            visitorId = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2,9);
+            localStorage.setItem(VISITOR_KEY, visitorId);
+        }
+        
+        // Track visit
+        function trackVisit() {
+            fetch(`${DB_URL}/analytics/visits.json`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    visitorId: visitorId,
+                    timestamp: Date.now(),
+                    isNew: isNew,
+                    userAgent: navigator.userAgent
+                })
+            }).catch(()=>{});
+        }
+        
+        // Update presence (online status)
+        function updatePresence() {
+            fetch(`${DB_URL}/presence/${visitorId}.json`, {
+                method: 'PUT',
+                body: JSON.stringify({ lastSeen: Date.now() })
+            }).catch(()=>{});
+        }
+        
+        trackVisit();
+        updatePresence();
+        setInterval(updatePresence, 30000);
+
+        // DOM elements
+        const home = document.getElementById('homeScreen');
+        const gameView = document.getElementById('gameView');
+        const gameViewTitle = document.getElementById('gameViewTitle');
+        const overlay = document.getElementById('overlay');
+        const passModal = document.getElementById('passwordModal');
+        const passInput = document.getElementById('passInput');
+        const errorModal = document.getElementById('errorModal');
+        const youtubeThumb = document.getElementById('youtubeThumb');
+        const giveawayTitle = document.getElementById('giveawayTitle');
+        const giveawayMsg = document.getElementById('giveawayMsg');
+        const giveawayFooter = document.getElementById('giveawayFooter');
+        const gameFrame = document.getElementById('gameFrame');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const downloadMsg = document.getElementById('downloadMessage');
+        const contact = document.getElementById('contactLink');
+        const wa = document.getElementById('waLink');
+        const yt = document.getElementById('ytLink');
+        const fb = document.getElementById('fbLink');
+        const footerText = document.getElementById('footerText');
+        const mainTitle = document.getElementById('mainTitle');
+        const officialTag = document.getElementById('officialTag');
+        const officialTag2 = document.getElementById('officialTag2');
+        const gameTitle = document.getElementById('gameTitle');
+        const gameSub = document.getElementById('gameSub');
+        const wingoBtn = document.getElementById('wingoBtn');
+        const numberBtn = document.getElementById('numberBtn');
+        const tick = document.getElementById('tick');
+        const reqText = document.getElementById('reqText');
+
+        const panel = document.getElementById('panel');
+        const panelTitle = document.getElementById('panelTitle');
+        const period = document.getElementById('period');
+        const timer = document.getElementById('timer');
+        const wingoPred = document.getElementById('wingoPred');
+        const numberPred = document.getElementById('numberPred');
+        const wingoText = document.getElementById('wingoText');
+        const numberGrid = document.getElementById('numberGrid');
+        const tableHead = document.getElementById('tableHead');
+        const history = document.getElementById('history');
+        const tab30 = document.getElementById('tab30');
+        const tab1M = document.getElementById('tab1M');
+
+        let APP_PASS = "7474";
+        let GAME_URL = "https://www.example.com";
+        let isUnlocked = false;
+        let liveInterval;
+        let currentGame = "30S";
+        let currentType = 'wingo';
+        let numCache = {};
+        let wingoCache = {};
+        let lastPeriod = null;
+        let panelVisible = false;
+        let lastTick = -1;
+
+        const SMALL = [0,1,2,3,4]; const BIG = [5,6,7,8,9];
+        function shuffle(a) { for(let i=a.length-1; i>0; i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+        function genNum(prev, idx) {
+            const sc = idx%2===0?2:3; const bc=5-sc;
+            for(let a=0;a<500;a++) {
+                const sp=shuffle([...SMALL]); const ss=sp.slice(0,sc);
+                const bp=shuffle([...BIG]); const bs=bp.slice(0,bc);
+                const can=shuffle([...ss,...bs]);
+                if(prev) { const o=can.filter(d=>prev.includes(d)).length; if(o>2) continue; }
+                return can.join('');
+            } return "01234";
+        }
+        function randWingo() { return Math.random()<0.5?"BIG":"SMALL"; }
+        function getNum(p) { return parseInt(String(p).replace(/\D/g,''))||0; }
+
+        const API = {
+            "30S": { time:"https://draw.ar-lottery01.com/WinGo/WinGo_30S.json", hist:"https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json" },
+            "1M": { time:"https://draw.ar-lottery01.com/WinGo/WinGo_1M.json", hist:"https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json" }
+        };
+
+        function playTick() { try { tick.volume=1; tick.currentTime=0; tick.play().catch(()=>{}); }catch(e){} }
+        function stopTick() { try { tick.pause(); tick.currentTime=0; }catch(e){} }
+
+        function updatePred(period) {
+            if(!period||period==="--") return;
+            if(currentType==='wingo') {
+                if(!wingoCache[period]) wingoCache[period]=randWingo();
+                wingoText.innerText=wingoCache[period];
+                wingoPred.style.display='block'; numberPred.style.display='none';
+            } else {
+                if(!numCache[period]) {
+                    const all=Object.keys(numCache).sort();
+                    const prev=all.length>1?all[all.length-2]:null;
+                    const prevD=prev?numCache[prev]:null;
+                    const idx=all.length;
+                    const str=genNum(prevD,idx);
+                    numCache[period]=str.split('').map(Number);
+                }
+                const set=numCache[period]||[];
+                numberGrid.innerHTML='';
+                set.forEach(n=>{ const d=document.createElement('div'); d.className='number-box'; d.innerText=n; numberGrid.appendChild(d); });
+                wingoPred.style.display='none'; numberPred.style.display='block';
+            }
+            lastPeriod=period;
+        }
+
+        async function fetchData() {
+            if(!isUnlocked||!panelVisible) return;
+            try {
+                const [tRes,hRes]=await Promise.all([ fetch(API[currentGame].time), fetch(API[currentGame].hist) ]);
+                const tData=await tRes.json(); const hData=await hRes.json();
+                const curPer=tData?.current?.issueNumber||"--";
+                const end=tData?.current?.endTime;
+                const now=Date.now();
+                let sec=0;
+                if(end) {
+                    sec=Math.floor((end-now)/1000);
+                    const max=currentGame==="30S"?30:60;
+                    if(sec>max) sec=max;
+                    if(sec<0) sec=0;
+                }
+                sec=Math.max(0,Math.min(sec,currentGame==="30S"?30:60));
+                period.innerText=curPer;
+                timer.innerText=`⏱️ ${sec}`;
+
+                if(sec<=5&&sec>0) {
+                    timer.classList.add('warning');
+                    if(sec!==lastTick) { lastTick=sec; playTick(); }
+                } else { timer.classList.remove('warning'); if(sec===0) { stopTick(); lastTick=-1; } }
+
+                const histList=hData?.data?.list||[];
+                let allP=histList.map(i=>i.issueNumber);
+                if(curPer!=="--") allP.push(curPer);
+                allP=[...new Set(allP)];
+                let pObjs=allP.map(p=>({period:p,num:getNum(p)})).sort((a,b)=>a.num-b.num);
+                let prevD=null,idx=0;
+                for(let po of pObjs) {
+                    if(!numCache[po.period]) {
+                        const str=genNum(prevD,idx);
+                        numCache[po.period]=str.split('').map(Number);
+                    }
+                    prevD=numCache[po.period]; idx++;
+                }
+                if(curPer!==lastPeriod&&curPer!=="--") updatePred(curPer);
+
+                if(currentType==='wingo') tableHead.innerHTML='<tr><th>Period</th><th>Result</th></tr>';
+                else tableHead.innerHTML='<tr><th>Period</th><th>Pred</th><th>Result</th></tr>';
+
+                let last=histList.slice(0,5); history.innerHTML="";
+                last.forEach(item=>{
+                    const iss=item.issueNumber; const act=parseInt(item.number);
+                    if(currentType==='wingo') {
+                        const a=(act>=0&&act<=4)?"SMALL":"BIG";
+                        history.innerHTML+=`<tr><td>${iss}</td><td>${a}</td></tr>`;
+                    } else {
+                        const set=numCache[iss]||[]; const pred=set.join('');
+                        history.innerHTML+=`<tr><td>${iss}</td><td>${pred}</td><td>${act}</td></tr>`;
+                    }
+                });
+            } catch(e) { console.error(e); }
+        }
+
+        function switchGame(g) {
+            if(g===currentGame) return;
+            currentGame=g;
+            tab30.classList.toggle('active',g==='30S'); tab1M.classList.toggle('active',g==='1M');
+            lastPeriod=null; if(panelVisible) fetchData();
+        }
+
+        // Track download
+        function trackDownload(event) {
+            if (!downloadBtn.classList.contains('disabled')) {
+                fetch(`${DB_URL}/analytics/downloads.json`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        visitorId: visitorId,
+                        timestamp: Date.now()
+                    })
+                }).catch(()=>{});
+            }
+        }
+
+        async function loadConfig() {
+            try {
+                const r=await fetch(`${DB_URL}/config.json`);
+                const c=await r.json()||{};
+                if(c.mainTitle) mainTitle.innerText=c.mainTitle;
+                if(c.officialNameTag) { officialTag.innerText=c.officialNameTag; officialTag2.innerText=c.officialNameTag; }
+                if(c.gameSubtitle) gameTitle.innerText=c.gameSubtitle;
+                if(c.gameSub) gameSub.innerText=c.gameSub;
+                if(c.wingoButtonText) wingoBtn.innerText=c.wingoButtonText;
+                if(c.numberButtonText) numberBtn.innerText=c.numberButtonText;
+                if(c.footerSmallText) footerText.innerText=c.footerSmallText;
+                
+                // Download button
+                if (c.downloadAppLink) {
+                    downloadBtn.href = c.downloadAppLink;
+                    downloadBtn.classList.remove('disabled');
+                    downloadMsg.style.display = 'none';
+                } else {
+                    downloadBtn.classList.add('disabled');
+                    downloadMsg.style.display = 'block';
+                }
+                
+                if(c.whatsappNumber) contact.href=`https://wa.me/${c.whatsappNumber}`;
+                if(c.whatsappContactLink) wa.href=c.whatsappContactLink;
+                if(c.registerGameLink) GAME_URL=c.registerGameLink;
+                if(c.youtubeChannelLink) yt.href=c.youtubeChannelLink;
+                if(c.facebookPageLink) fb.href=c.facebookPageLink;
+                if(c.dailyGiveawayTitle) giveawayTitle.innerText=c.dailyGiveawayTitle;
+                if(c.dailyGiveawayMessage) giveawayMsg.innerHTML=c.dailyGiveawayMessage.replace(/\n/g,'<br>');
+                if(c.dailyGiveawayFooter) giveawayFooter.innerText=c.dailyGiveawayFooter;
+                if(c.youtubeVideoUrl) youtubeThumb.onclick=()=>window.open(c.youtubeVideoUrl,'_blank');
+                
+                if(c.youtubeThumbnailUrl) {
+                    youtubeThumb.style.backgroundImage = `url('${c.youtubeThumbnailUrl}')`;
+                }
+                
+                if(c.appPassword) APP_PASS=c.appPassword;
+                if(c.passwordRequirementText) reqText.innerHTML=c.passwordRequirementText.replace(/\n/g,'<br>');
+                else reqText.innerHTML=`👉 ہماری لنک سے نیا اکاؤنٹ بنائیں<br>👉 اکاؤنٹ میں ڈیپازٹ کریں<br>👉 ڈیپازٹ کا اسکرین شاٹ ہمارے ساتھ شیئر کریں<br><span style="color:var(--teal);font-weight:600;">✅ *اس کے بعد آپ کو ہیک کا پاس ورڈ دے دیا جائے گا*</span><br><span style="color:var(--gold);font-weight:600;">⚠️ *اہم شرط* :</span>✔️ *صرف NEW ACCOUNT قابلِ قبول ہے*<br>✔️ کم از کم ڈیپازٹ 300 یا اس سے زیادہ ہونا لازمی ہے<br>🚀 *Limited Offer*`;
+            } catch(e) { console.warn(e); }
+        }
+
+        function playSound() { document.getElementById('clickSound').play().catch(()=>{}); if(navigator.vibrate) navigator.vibrate(40); }
+
+        function startGame(t) { 
+            playSound(); 
+            currentType=t; 
+            home.style.display='none'; 
+            
+            // Show fullscreen game view
+            gameView.classList.add('show');
+            gameViewTitle.innerText = t === 'wingo' ? 'WINGO GAME' : 'NUMBER GAME';
+            gameFrame.src = GAME_URL;
+            
+            panelTitle.innerText=t==='wingo'?'WINGO PREDICTION':'NUMBER PREDICTION'; 
+        }
+        
+        function backToHome() { 
+            playSound(); 
+            gameView.classList.remove('show'); 
+            home.style.display='block'; 
+            gameFrame.src = 'about:blank'; // Clear iframe
+            hidePanel(); 
+        }
+
+        function togglePanel() {
+            playSound();
+            if(!isUnlocked) { passModal.style.display='block'; overlay.style.display='block'; passInput.value=''; return; }
+            if(panelVisible) hidePanel(); else showPanel();
+        }
+        function showPanel() {
+            panelVisible=true; panel.classList.add('show');
+            lastPeriod=null; fetchData();
+            if(liveInterval) clearInterval(liveInterval); liveInterval=setInterval(fetchData,1000);
+        }
+        function hidePanel() {
+            panelVisible=false; panel.classList.remove('show'); stopTick();
+            if(liveInterval) { clearInterval(liveInterval); liveInterval=null; }
+        }
+        function closeModal() { passModal.style.display='none'; overlay.style.display='none'; }
+        function checkPass() {
+            if(passInput.value===APP_PASS) { playSound(); isUnlocked=true; closeModal(); showPanel(); }
+            else { playSound(); errorModal.style.display='flex'; passInput.value=''; }
+        }
+        function handleClick(e) { 
+            e.preventDefault(); 
+            playSound(); 
+            const h=e.currentTarget.href; 
+            if(h&&h!=='#') window.open(h,'_blank'); 
+        }
+
+        window.onload=async()=>{ await loadConfig(); home.style.display='block'; gameView.classList.remove('show'); panelTitle.innerText='WINGO PREDICTION'; };
+    </script>
+</body>
+</html>
